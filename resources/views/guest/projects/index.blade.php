@@ -42,9 +42,12 @@
 
                         <div class="fs-3">{{$elem['title']}}</div>
 
-                        {{-- <span>
-                            {{$elem->type->name}}
-                        </span> --}}
+                        @if ($elem->type)
+                            <div>
+                                <span>Categoria progetto:</span>
+                                    {{$elem->type->name}}
+                            </div>
+                        @endif
 
                     </a>
 
