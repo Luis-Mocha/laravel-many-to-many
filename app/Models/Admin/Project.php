@@ -32,9 +32,14 @@ class Project extends Model
         'link_project',
     ];
 
-    // Funzione per specificare la relazione con la tabella Types
+    // Funzione per specificare la relazione con la tabella Types (one to many)
     public function type() {
         return $this->belongsTo(Type::class);
+    }
+
+    // Funzione per specificare la relazione con la tabella Tecnolgies (many to many)
+    public function tecnologies() {
+        return $this->belongsToMany(Technology::class);
     }
 
 }
