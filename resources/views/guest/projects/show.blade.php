@@ -17,9 +17,27 @@
                 {{$project['description']}}
             </p>
 
+            
+            @if ($project->type)
+                <div>
+                    <span>Categoria progetto:</span>
+                        {{$project->type->name}}
+                </div>
+            @endif
+
             <div>
-                <span>Categoria progetto:</span>
-                {{$project->type->name}}
+                <span>Tecnologie usate:</span>
+                {{-- @dd($project->technologies) --}}
+                @if ($project->technologies)
+                    
+                    <ul>
+                        @foreach ($project->technologies as $techElem)
+                            <li>
+                                {{$techElem->name}}
+                            </li> 
+                        @endforeach
+                    </ul>
+                @endif
             </div>
 
             <a href="{{$project['link_project']}}" target="_blank" rel="noopener noreferrer" class="text-primary">Link al progetto</a>
