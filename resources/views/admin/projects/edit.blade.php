@@ -72,7 +72,36 @@
             {{-- errore validazione --}}
             @error('type_id')
                 <div class="alert alert-warning py-1 m-0 fst-italic">{{ $message }}</div>
-            @enderror 
+            @enderror
+
+
+            {{-- Checkbox technologies --}}
+            <div class="form-group mt-3">
+                <div>
+                    Tecnologie utilizzate:
+                </div>
+                <div class="d-flex flex-wrap">
+                    
+                    @foreach ($technologies as $elem)
+                        <div class="me-4">
+                            <label for="input-technology-{{$elem->id}}" class="form-label">
+                                {{$elem->name}}:
+                            </label>
+
+                            @if ($errors->any())
+
+                                <input type="checkbox" id="input-technology-{{$elem->id}}" value="{{$elem->id}}" name="technologies[]" {{ in_array( $elem->id, old('technologies', [] ) ) ? 'checked' : '' }}>
+                                
+                            @else
+                                {{-- nessun errore --}}
+                                <input type="checkbox" id="input-technology-{{$elem->id}}" value="{{$elem->id}}" name="technologies[]" {{ $project->technologies->contains($elem) ? 'checked' : '' }}>
+                                
+                            @endif
+                            
+                        </div>
+                    @endforeach
+                </div>
+            </div>
 
 
             {{-- Bottone Edit --}}

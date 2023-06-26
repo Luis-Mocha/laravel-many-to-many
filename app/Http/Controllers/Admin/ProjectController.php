@@ -134,7 +134,9 @@ class ProjectController extends Controller
         // importo i type dal modello type
         $types = Type::all();
 
-        return view( 'admin.projects.edit', compact ('project', 'types'));
+        $technologies = Technology::all();
+
+        return view( 'admin.projects.edit', compact ('project', 'types', 'technologies'));
     }
 
     /**
@@ -176,7 +178,6 @@ class ProjectController extends Controller
 
         //trasformo lo slug
         $slug = Project::generateSlug($request->title);
-
         $form_data['slug'] =$slug;
 
 
@@ -197,6 +198,11 @@ class ProjectController extends Controller
 
 
         $project->update( $form_data );
+
+        //Controllo Technologies aggiornati
+        if ($request->has('technologies')) {
+            $project->technologies()->sync($request->technologies);
+        }
 
         //ritorno ad un'altra pagina
         return redirect()->route('admin.projects.index')->with('successEdit', 'Hai modificato un progetto!');
