@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 // importo il modello
 use App\Models\Admin\Project;
-
+use App\Models\Admin\Technology;
 use App\Models\Admin\Type;
 
 // importo la classe Rule per le eccezioni nell'unique
@@ -43,7 +43,9 @@ class ProjectController extends Controller
         // importo i type dal modello type
         $types = Type::all();
 
-        return view('admin.projects.create', compact('types'));
+        $technologies = Technology::all();
+
+        return view('admin.projects.create', compact('types', 'technologies'));
     }
 
     /**
@@ -74,15 +76,14 @@ class ProjectController extends Controller
 
         // funzione per salvare i nuovi dati nel database
         $form_data = $request ->all();
-        // dd($request);
+
 
         //trasformo lo slug
         $slug = Project::generateSlug($request->title);
-
-
         $form_data['slug'] = $slug;
 
-        // caricamento immagine se presente
+
+        // Caricamento immagine se presente
         if ($request->hasFile('cover_img') ) {
 
             // creo un path dove viene salvata la cover del progetto
@@ -92,12 +93,20 @@ class ProjectController extends Controller
             $form_data['cover_img'] = $path;
         }
 
-        //creo il nuovo progetto
-        $newProject = new Project();
-        
-        $newProject->fill( $form_data );
 
-        $newProject->save();
+        // Creo il nuovo progetto
+            // $newProject = new Project();
+            // $newProject->fill( $form_data );
+            // $newProject->save();
+        $newProject = Project::create($form_data);
+
+        //Controllo checked Technologies
+        if ($request->has('technologies')) {
+
+            $newProject->technologies()->attach($request->technologies);
+        }
+
+        // dd($request);
 
         //ritorno ad un'altra pagina
         return redirect()->route('admin.projects.index')->with('successCreate', 'Hai creato un nuovo progetto!');
