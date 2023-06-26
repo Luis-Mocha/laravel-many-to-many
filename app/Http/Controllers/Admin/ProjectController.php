@@ -216,6 +216,10 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
+
+        // rimuovo i record con relazioni
+        $project->technologies()->sync([]);
+
         //cancello l'immagine dallo storage
         if( $project->cover_img ){
             Storage::delete($project->cover_img);
