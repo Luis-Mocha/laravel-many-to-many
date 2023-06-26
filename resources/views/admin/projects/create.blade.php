@@ -75,7 +75,7 @@
                 <div>
                     Tecnologie utilizzate:
                 </div>
-                <div class="d-flex">
+                <div class="d-flex flex-wrap">
                     
                     @foreach ($technologies as $elem)
                         <div class="me-4">
