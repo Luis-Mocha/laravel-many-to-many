@@ -1,4 +1,9 @@
 @extends('layouts.app')
+
+@section('page-title')
+    Luis Mocha | Home
+@endsection
+
 @section('content')
 
 <div class="page-hero">

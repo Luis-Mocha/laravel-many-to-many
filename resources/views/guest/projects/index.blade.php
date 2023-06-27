@@ -1,4 +1,10 @@
 @extends('layouts.app')
+
+@section('page-title')
+    Luis Mocha | Projects
+@endsection
+
+
 @section('content')
 
 
