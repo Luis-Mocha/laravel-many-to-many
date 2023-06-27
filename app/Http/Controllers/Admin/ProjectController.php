@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreProjectRequest;
 use Illuminate\Http\Request;
 
 // importo il modello
@@ -54,29 +55,29 @@ class ProjectController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreProjectRequest $request)
     {
 
-        $request->validate(
-            [
-                'type_id' => 'nullable|exists:types,id',
-                'title' => 'required|unique:projects',
-                'description' => 'nullable',
-                'cover_img' => 'nullable|image',
-                'link_project' => 'nullable|unique:projects|url',
-            ],
-            [
-                'title.required'=> 'Il campo "titolo" è richiesto',
-                'title.unique'=> 'Questo titolo è già utilizzato',
-                'cover_img.image' => 'Il file deve essere di tipo immagine',
-                'link_project.unique' => 'Questo link è già utilizzato',
-                'link_project.url' => 'Questo campo deve contenere un link URL valido '
-            ]
-        );
+        // $request->validate(
+        //     [
+        //         'type_id' => 'nullable|exists:types,id',
+        //         'title' => 'required|unique:projects',
+        //         'description' => 'nullable',
+        //         'cover_img' => 'nullable|image',
+        //         'link_project' => 'nullable|unique:projects|url',
+        //     ],
+        //     [
+        //         'title.required'=> 'Il campo "titolo" è richiesto',
+        //         'title.unique'=> 'Questo titolo è già utilizzato',
+        //         'cover_img.image' => 'Il file deve essere di tipo immagine',
+        //         'link_project.unique' => 'Questo link è già utilizzato',
+        //         'link_project.url' => 'Questo campo deve contenere un link URL valido '
+        //     ]
+        // );
+        // // funzione per salvare i nuovi dati nel database
+        // $form_data = $request ->all();
 
-        // funzione per salvare i nuovi dati nel database
-        $form_data = $request ->all();
-
+        $form_data = $request->validated();
 
         //trasformo lo slug
         $slug = Project::generateSlug($request->title);
