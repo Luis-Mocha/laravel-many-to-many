@@ -1,4 +1,4 @@
-#app {
+body {
     background: #0F2027;  /* fallback for old browsers */
     background: -webkit-linear-gradient(to left, #2C5364, #203A43, #0F2027);
     background: linear-gradient(to left, #2C5364, #203A43, #0F2027);
@@ -14,9 +14,20 @@ header {
             color: #e09f3e;
         }
     }
-    
-    .navbar-collapse{
-        z-index: 99;
+
+    @media screen and (width < 576px) {
+        .navbar-collapse {
+            z-index: 99;
+            background: #0F2027;  /* fallback for old browsers */
+            background: -webkit-linear-gradient(to left, #2C5364, #203A43, #0F2027);
+            background: linear-gradient(to left, #2C5364, #203A43, #0F2027);
+            border-bottom: 1px;
+            border-right: 1px;
+            border-top: 0;
+            border-left: 0;
+            border-color: white;
+            border-style:groove;
+        }
     }
 }
 
