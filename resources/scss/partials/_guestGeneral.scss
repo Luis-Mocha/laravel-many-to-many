@@ -8,6 +8,16 @@ body {
 header {
     height: 80px;
     z-index: 99;
+
+    .navbar-toggler {
+        color: inherit;
+        border: 0px;
+
+        &:focus {
+            box-shadow: none;
+        }
+    }
+
     .nav-link {
         color: white;
         &:hover {

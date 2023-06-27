@@ -26,11 +26,11 @@
     <div id="app">
 
         <header>
-            <nav class="navbar navbar-expand-md navbar-light shadow-sm">
+            <nav class="navbar navbar-expand-sm navbar-light shadow-sm">
                 <div class="container">
 
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                        <span class="navbar-toggler-icon"></span>
+                        <i class="fa-regular fa-compass"></i> Menu
                     </button>
 
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
