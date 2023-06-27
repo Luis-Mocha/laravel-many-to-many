@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreProjectRequest;
+use App\Http\Requests\UpdateProjectRequest;
 use Illuminate\Http\Request;
 
 // importo il modello
@@ -147,35 +148,10 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Project $project)
+    public function update(UpdateProjectRequest $request, Project $project)
     {
-        $request->validate(
-            [
-                'type_id' => 'nullable|exists:types,id',
-                'title' => [
-                    'required',
-                    Rule::unique('projects')->ignore($project->id),
-                ],
-                'description' => 'nullable',
-                'cover_img' => 'nullable|image',
-                'link_project' => [
-                    'nullable',
-                    'url',
-                    Rule::unique('projects')->ignore($project->id),
-                ]
-            ],
-            [
-                'title.required'=> 'Il campo "titolo" è richiesto',
-                'title.unique'=> 'Questo titolo è già utilizzato in altri progetti',
-                'cover_img.image' => 'Il file deve essere di tipo immagine',
-                'link_project.unique' => 'Questo link è già utilizzato in altri progetti',
-                'link_project.url' => 'Questo campo deve contenere un link URL valido '
-            ]
-        );
 
-
-        // funzione per salvare i dati modificati nel database
-        $form_data = $request->all();
+        $form_data = $request->validated();
 
         //trasformo lo slug
         $slug = Project::generateSlug($request->title);
