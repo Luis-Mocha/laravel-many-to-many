@@ -25,10 +25,10 @@
                 </div>
             @endif
 
-            <div>
-                <span>Tecnologie usate:</span>
-                {{-- @dd($project->technologies) --}}
-                @if ($project->technologies)
+            @if (count ($project->technologies) != 0 )
+                <div>
+                    <span>Tecnologie usate:</span>
+                    {{-- @dd($project->technologies) --}}
                     
                     <ul>
                         @foreach ($project->technologies as $techElem)
@@ -37,8 +37,9 @@
                             </li> 
                         @endforeach
                     </ul>
-                @endif
-            </div>
+                
+                </div>
+            @endif
 
             <a href="{{$project['link_project']}}" target="_blank" rel="noopener noreferrer" class="text-primary">Link al progetto</a>
         </div>
