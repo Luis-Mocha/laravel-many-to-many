@@ -82,7 +82,7 @@
                             <label for="input-technology-{{$elem->id}}" class="form-label">
                                 {{$elem->name}}:
                             </label>
-                            <input type="checkbox" id="input-technology-{{$elem->id}}" value="{{$elem->id}}" name="technologies[]">
+                            <input type="checkbox" id="input-technology-{{$elem->id}}" value="{{$elem->id}}" name="technologies[]" {{ in_array( $elem->id, old('technologies', [] ) ) ? 'checked' : '' }}>
                         </div>
                     @endforeach
                 </div>
